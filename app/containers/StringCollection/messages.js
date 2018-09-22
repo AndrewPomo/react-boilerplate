@@ -9,6 +9,6 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   header: {
     id: 'app.containers.StringCollection.header',
-    defaultMessage: 'This is StringCollection container !',
+    defaultMessage: 'Behold! The string collection!',
   },
 });
