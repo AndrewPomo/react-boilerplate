@@ -1,35 +1,72 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
-
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+
+import { loadStrings } from '../App/actions';
+import { changeString } from './actions';
+import { makeSelectString } from './selectors';
+import reducer from './reducer';
+import saga from './saga';
 
 /* eslint-disable react/prefer-stateless-function */
-export default class HomePage extends React.PureComponent {
+export class HomePage extends React.PureComponent {
   render() {
     return (
       <div>
-        <h1>
-          <FormattedMessage {...messages.header} />
-        </h1>
-        <h2>
-          <FormattedMessage {...messages.subheader} />
-        </h2>
-        <form>
-          <input placeholder="Submit a new string here" />
-          <br />
-          <input type="submit" />
+        <h1>Welcome to string collector!</h1>
+        <h2>Input a string below to add it to the collection</h2>
+        <form onSubmit={this.props.handleSubmit}>
+          <label htmlFor="string">
+            <input
+              id="string"
+              placeholder="Enter string here"
+              onChange={this.props.handleChange}
+            />
+            <br />
+            <input type="submit" />
+          </label>
         </form>
+        <a href="/collection" className="button">
+          View String Collection
+        </a>
       </div>
     );
   }
 }
+
+HomePage.propTypes = {
+  handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
+};
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    handleChange: evt => dispatch(changeString(evt.target.value)),
+    handleSubmit: evt => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(loadStrings());
+    },
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  string: makeSelectString(),
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+const withReducer = injectReducer({ key: 'homePage', reducer });
+const withSaga = injectSaga({ key: 'homePage', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(HomePage);

@@ -1,14 +1,8 @@
-/*
- *
- * HomePage actions
- *
- */
+import { CHANGE_STRING } from './constants';
 
-import { SUBMIT_STRING } from './constants';
-
-export function submitString(string) {
+export function changeString(string) {
   return {
-    type: SUBMIT_STRING,
+    type: CHANGE_STRING,
     string,
   };
 }

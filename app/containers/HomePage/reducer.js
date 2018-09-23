@@ -1,18 +1,14 @@
-/*
- *
- * HomePage reducer
- *
- */
-
 import { fromJS } from 'immutable';
-import { SUBMIT_STRING } from './constants';
+import { CHANGE_STRING } from './constants';
 
-export const initialState = fromJS({});
+export const initialState = fromJS({
+  string: '',
+});
 
 function homePageReducer(state = initialState, action) {
   switch (action.type) {
-    case SUBMIT_STRING:
-      return state;
+    case CHANGE_STRING:
+      return state.set('string', action.string);
     default:
       return state;
   }

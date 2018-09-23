@@ -1,7 +1,1 @@
-/*
- *
- * HomePage constants
- *
- */
-
-export const SUBMIT_STRING = 'app/HomePage/SUBMIT_STRING';
+export const CHANGE_STRING = 'app/HomePage/CHANGE_STRING';
