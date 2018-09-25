@@ -1,47 +1,57 @@
-/**
- *
- * StringCollection
- *
- */
-
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 
-import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-import messages from './messages';
+import injectReducer from 'utils/injectReducer';
+// import injectSaga from 'utils/injectSaga';
+import { makeSelectStrings } from './selectors';
+import reducer from './reducer';
+import { loadStrings } from '../App/actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class StringCollection extends React.PureComponent {
   render() {
     return (
       <div>
-        <FormattedMessage {...messages.header} />
+        <h1>Behold, the string collection!</h1>
+        {/* put a table here */}
+        <a href="/" className="button">
+          Return to homepage
+        </a>
       </div>
     );
   }
 }
 
 StringCollection.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // handleSubmit: PropTypes.func,
 };
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    handleSubmit: evt => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(loadStrings());
+    },
   };
 }
 
+const mapStateToProps = createStructuredSelector({
+  repos: makeSelectStrings(),
+});
+
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
-const withSaga = injectSaga({ key: 'stringCollection', saga });
+
+const withReducer = injectReducer({ key: 'stringCollection', reducer });
+// const withSaga = injectSaga({ key: 'stringCollection', saga });
 
 export default compose(
-  withSaga,
+  // withSaga,
   withConnect,
+  withReducer,
 )(StringCollection);
