@@ -6,8 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
-import { loadStrings } from '../App/actions';
-import { changeString } from './actions';
+import { changeString, addString } from './actions';
 import { makeSelectString } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -48,7 +47,7 @@ export function mapDispatchToProps(dispatch) {
     handleChange: evt => dispatch(changeString(evt.target.value)),
     handleSubmit: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadStrings());
+      dispatch(addString());
     },
   };
 }
