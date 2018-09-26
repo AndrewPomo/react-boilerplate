@@ -6,7 +6,6 @@ import { makeSelectString } from 'containers/HomePage/selectors';
 export function* addString() {
   const string = yield select(makeSelectString());
   const requestURL = `/api`;
-
   yield request(requestURL, {
     method: 'POST',
     headers: {

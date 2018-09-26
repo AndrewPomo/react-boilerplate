@@ -5,9 +5,9 @@ router.use(bodyParser.json());
 
 const mongoose = require('mongoose');
 const stringSchema = new mongoose.Schema({
-  string: String,
+  text: String,
 });
-
+/* eslint-disable array-callback-return */
 mongoose.connect('mongodb://@localhost:27017/strings');
 const db = mongoose.connection;
 db.on('connected', () => console.log('Mongo connected'));
@@ -15,7 +15,7 @@ db.on('connected', () => console.log('Mongo connected'));
 const SubmittedString = mongoose.model('String', stringSchema);
 
 router.post('/', (req, res) => {
-  const string = new SubmittedString({ string: req.body.string });
+  const string = new SubmittedString({ text: req.body.string });
   string.save(err => {
     if (err) {
       console.log(err);

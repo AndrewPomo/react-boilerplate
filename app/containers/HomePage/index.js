@@ -10,28 +10,40 @@ import { changeString, addString } from './actions';
 import { makeSelectString } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import Header from '../../components/Header';
+import SubHead from '../../components/SubHead';
+import NavLink from '../../components/NavLink';
+import SubmitForm from '../../components/SubmitForm';
+import SubmitButton from '../../components/SubmitButton';
+import Input from '../../components/Input';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
   render() {
+    const enabled = this.props.string.length > 0;
     return (
       <div>
-        <h1>Welcome to string collector!</h1>
-        <h2>Input a string below to add it to the collection</h2>
-        <form onSubmit={this.props.handleSubmit}>
-          <label htmlFor="string">
-            <input
-              id="string"
-              placeholder="Enter string here"
-              onChange={this.props.handleChange}
-            />
-            <br />
-            <input type="submit" />
-          </label>
-        </form>
-        <a href="/collection" className="button">
+        <Header>Welcome to string collector!</Header>
+        <SubHead>Input a string below to add it to the collection</SubHead>
+        <SubmitForm onSubmit={this.props.handleSubmit}>
+          <Input
+            id="string"
+            placeholder="Enter string here"
+            type="text"
+            minlength="1"
+            onChange={this.props.handleChange}
+            value={this.props.string}
+          />
+          <br />
+          <SubmitButton
+            disabled={!enabled}
+            type="submit"
+            value="Submit String"
+          />
+        </SubmitForm>
+        <NavLink href="/collection" className="button">
           View String Collection
-        </a>
+        </NavLink>
       </div>
     );
   }
@@ -40,6 +52,7 @@ export class HomePage extends React.PureComponent {
 HomePage.propTypes = {
   handleSubmit: PropTypes.func,
   handleChange: PropTypes.func,
+  string: PropTypes.string,
 };
 
 export function mapDispatchToProps(dispatch) {

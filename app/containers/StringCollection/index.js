@@ -10,6 +10,9 @@ import { makeSelectStrings } from './selectors';
 import reducer from './reducer';
 import { loadStrings } from './actions';
 import saga from './saga';
+import StringList from '../../components/StringList';
+import Header from '../../components/Header';
+import NavLink from '../../components/NavLink';
 
 /* eslint-disable react/prefer-stateless-function */
 export class StringCollection extends React.PureComponent {
@@ -20,13 +23,11 @@ export class StringCollection extends React.PureComponent {
   render() {
     return (
       <div>
-        <h1>Behold, the string collection!</h1>
-        <a href="/" className="button">
+        <Header>Behold, the string collection!</Header>
+        <NavLink href="/" className="button">
           Return to homepage
-        </a>
-        {this.props.strings.map(string => (
-          <li key={string._id}>{string.string}</li>
-        ))}
+        </NavLink>
+        <StringList strings={this.props.strings} />
       </div>
     );
   }
