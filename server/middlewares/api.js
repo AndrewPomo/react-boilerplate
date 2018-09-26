@@ -31,7 +31,6 @@ router.get('/', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(strings);
       res.json(strings);
     }
   });

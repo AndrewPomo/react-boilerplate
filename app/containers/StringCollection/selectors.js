@@ -5,7 +5,7 @@ const selectCollection = state => state.get('stringCollection', initialState);
 
 const makeSelectStrings = () =>
   createSelector(selectCollection, collectionState =>
-    collectionState.get('string'),
+    collectionState.get('strings'),
   );
 
 export { selectCollection, makeSelectStrings };

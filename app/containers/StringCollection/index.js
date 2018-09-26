@@ -24,13 +24,16 @@ export class StringCollection extends React.PureComponent {
         <a href="/" className="button">
           Return to homepage
         </a>
-        {/* put a table here */}
+        {this.props.strings.map(string => (
+          <li key={string._id}>{string.string}</li>
+        ))}
       </div>
     );
   }
 }
 
 StringCollection.propTypes = {
+  strings: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   handleLoad: PropTypes.func,
 };
 
@@ -43,7 +46,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  repos: makeSelectStrings(),
+  strings: makeSelectStrings(),
 });
 
 const withConnect = connect(

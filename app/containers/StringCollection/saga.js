@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
 
 import { LOAD_STRINGS } from './constants';
@@ -6,7 +6,6 @@ import { stringsLoaded, stringLoadingError } from './actions';
 
 export function* getStrings() {
   const requestURL = '/api';
-
   try {
     const strings = yield call(request, requestURL);
     yield put(stringsLoaded(strings));
@@ -16,5 +15,5 @@ export function* getStrings() {
 }
 
 export default function* stringData() {
-  yield takeEvery(LOAD_STRINGS, getStrings);
+  yield takeLatest(LOAD_STRINGS, getStrings);
 }
