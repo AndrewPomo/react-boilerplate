@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { LOAD_STRINGS } from '../App/constants';
+import { LOAD_STRINGS } from './constants';
 
 export const initialState = fromJS({
   strings: '',

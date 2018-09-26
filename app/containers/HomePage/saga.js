@@ -1,6 +1,4 @@
-import { stringify } from "querystring";
-
-import { put, select, takeLatest } from 'redux-saga/effects';
+import { put, select, takeEvery } from 'redux-saga/effects';
 import { ADD_STRING, CHANGE_STRING } from 'containers/HomePage/constants';
 import request from 'utils/request';
 import { makeSelectString } from 'containers/HomePage/selectors';
@@ -20,5 +18,5 @@ export function* addString() {
 }
 
 export default function* newString() {
-  yield takeLatest(ADD_STRING, addString);
+  yield takeEvery(ADD_STRING, addString);
 }

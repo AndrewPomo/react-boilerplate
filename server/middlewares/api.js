@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  String.find((err, strings) => {
+  SubmittedString.find((err, strings) => {
     if (err) {
       console.log(err);
     } else {
