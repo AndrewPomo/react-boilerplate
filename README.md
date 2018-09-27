@@ -5,7 +5,7 @@ String Collector is a React Boilerplate application that lets users submit strin
 1. First, you'll need to install MongoDB: https://docs.mongodb.com/manual/installation/
 2. Clone this repository<br>
 `git clone https://github.com/AndrewPomo/string-collector.git`
-2. From the directory you just create, run:
+2. From the directory you just created, run:
 `npm install`
 3. Start the application<br>
 `npm start`
