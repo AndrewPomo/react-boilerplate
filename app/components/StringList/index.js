@@ -6,7 +6,15 @@ import ListItem from 'components/ListItem';
 import SubHead from 'components/SubHead';
 
 /* eslint-disable no-underscore-dangle */
-function StringList({ strings }) {
+function StringList({ loading, error, strings }) {
+  if (loading) {
+    return <SubHead>Loading strings...</SubHead>;
+  }
+
+  if (error !== false) {
+    return <SubHead>Something went wrong.</SubHead>;
+  }
+
   if (strings.length) {
     return (
       <List>
@@ -17,10 +25,12 @@ function StringList({ strings }) {
     );
   }
 
-  return <SubHead>There are no strings in the collection. Go add one!</SubHead>;
+  return null;
 }
 
 StringList.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.any,
   strings: PropTypes.any,
 };
 

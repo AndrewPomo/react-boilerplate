@@ -2,7 +2,7 @@ import {
   LOAD_STRINGS,
   LOAD_STRINGS_SUCCESS,
   LOAD_STRINGS_ERROR,
-} from '../App/constants';
+} from './constants';
 
 export function loadStrings() {
   return {

@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
 
-import { LOAD_STRINGS } from './constants';
+import { LOAD_STRINGS } from '../App/constants';
 import { stringsLoaded, stringLoadingError } from './actions';
 
 export function* getStrings() {
