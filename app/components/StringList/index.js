@@ -25,7 +25,7 @@ function StringList({ loading, error, strings }) {
     );
   }
 
-  return null;
+  return <SubHead>There are no strings in the database. Go add some!</SubHead>;
 }
 
 StringList.propTypes = {
