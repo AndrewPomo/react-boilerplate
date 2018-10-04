@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
 
 import { LOAD_STRINGS } from '../App/constants';
-import { stringsLoaded, stringLoadingError } from './actions';
+import { stringsLoaded, stringLoadingError } from '../App/actions';
 
 export function* getStrings() {
   const requestURL = '/api';
